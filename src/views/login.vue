@@ -55,6 +55,7 @@ import axios from "../util/axios";
 import { useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { ElMessage } from "element-plus";
+import config from '../util/config';
 export default {
   setup() {
     const username = ref("");
@@ -70,7 +71,7 @@ export default {
       if (isValid.value) {
         try {
           const response = await axios.post(
-            "http://localhost:8080/user/login",
+            `${config.server_address}/user/login`,
             {
               name: username.value,
               password: password.value,
@@ -142,12 +143,14 @@ body {
   background-color: #f0f0f5;
 }
 
+
 .login-form {
   background-color: white;
   padding: 50px;
   box-shadow: 0px 10px 10px 0px rgba(10, 10, 10, 0.1);
   border-radius: 5px;
   animation: arrive 2000ms ease-out;
+  position: static;
 }
 
 .login-btn {

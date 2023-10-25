@@ -80,7 +80,7 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-
+import config from '../util/config';
 export default {
   setup() {
     const router = useRouter();
@@ -98,7 +98,7 @@ export default {
       if (isValid.value) {
         try {
           const response = await axios.post(
-            "http://localhost:8080/user/register",
+            `${config.server_address}/user/register`,
             {
               name: username.value,
               email: email.value,

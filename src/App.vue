@@ -1,3 +1,11 @@
+<!--
+ * @Copyright: 
+ * @file name: File name
+ * @Data: Do not edit
+ * @LastEditor: 
+ * @LastData: 
+ * @Describe: 
+-->
 
 <template>
   <div id="app">
@@ -16,11 +24,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; 
     min-height: 100vh;
+    width: 100vw;
 }
 
 html, body {
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     margin: 0;
 }
 
