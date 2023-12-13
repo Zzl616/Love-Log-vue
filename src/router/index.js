@@ -14,6 +14,14 @@
  * @LastData: 
  * @Describe: 
  */
+/*
+ * @Copyright: 
+ * @file name: File name
+ * @Data: Do not edit
+ * @LastEditor: 
+ * @LastData: 
+ * @Describe: 
+ */
 
 // /src/router/index.js
 import { createRouter, createWebHashHistory } from 'vue-router';
@@ -24,6 +32,8 @@ import imagelist from '../views/imagelist.vue'
 import container from '../views/container.vue'
 import aaaa from '../views/aaaa.vue'
 import events from '../views/events.vue'
+import video from '../views/video.vue'
+
 
 
 const routes = [
@@ -57,6 +67,11 @@ const routes = [
     path: '/events',
     name: 'events',
     component: events
+  },
+  {
+    path: '/video',
+    name: 'video',
+    component: video
   },
   {
     path: '/container',

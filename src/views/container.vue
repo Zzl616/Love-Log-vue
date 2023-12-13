@@ -21,10 +21,10 @@
           <el-menu-item index="0" style="height: 60px"
             ><el-image
               :src="'../Image/icon/iconaixin.jpg'"
-              style="width: 60px; height: 60px"
+              
           /></el-menu-item>
           <div class="flex-grow" />
-          <el-sub-menu index="1" style="height: 60px">
+          <el-sub-menu index="1" >
             <template #title>设置</template>
             <el-menu-item index="2-1" @click="handleCommand('logout')"
               >退出登录</el-menu-item
@@ -65,7 +65,7 @@
                 <el-icon>
                   <location />
                 </el-icon>
-                <span>相册</span>
+                <span class="custom-title">相册</span>
               </template>
               <el-menu-item-group>
                 <el-menu-item index="1-1" @click="changeComponent('my-test')"
@@ -76,6 +76,9 @@
                 >
                 <el-menu-item index="1-3" @click="changeComponent('events')"
                   >事件时间</el-menu-item
+                >
+                <el-menu-item index="1-4" @click="changeComponent('video')"
+                  >视频</el-menu-item
                 >
               </el-menu-item-group>
             </el-sub-menu>
@@ -96,6 +99,8 @@
 import myTest from "./test1.vue"; // Import sub-component
 import imageList from "./imagelist.vue";
 import events from "./events.vue";
+import video from "./video.vue";
+
 import Cookies from "js-cookie";
 import { ref } from "vue";
 
@@ -131,6 +136,7 @@ export default {
   },
 
   components: {
+    "video":video,
     "my-test": myTest,
     "image-list": imageList,
     events: events,
@@ -156,7 +162,7 @@ export default {
 .el-header {
   background-color: #b3c0d1;
   height: 60px;
-  /* border-bottom: 1px solid #c9c6c6; */
+  border-bottom: 2px solid black;
 }
 
 /* el-aside类定义了侧边栏的过渡效果、内左边距、外左边距和背景颜色 */
@@ -176,23 +182,17 @@ export default {
   background-color: #b3c0d1;
 }
 
-/* settings-container类使元素浮动到右边 */
-/* .settings-container {
-  float: right;
-}  */
-
-/* el-dropdown-link类定义了下拉链接的宽度、高度、边框、布局方式（flex）、垂直对齐方式和水平对齐方式 */
-/* .el-dropdown-link {
-  width: 80px;
-  height: 30px;
-  border: 5px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* el-menu-demo类定义了菜单的背景颜色 */
 .el-menu-demo {
   height: 100%;
 }
+
+.el-menu-vertical-demo {
+    --el-menu-hover-bg-color: #bcbdd4 !important;
+}
+
+
+.el-menu-vertical-demo .el-menu-item:hover {
+    background-color: #bcbdd4 !important;
+}
+
 </style>

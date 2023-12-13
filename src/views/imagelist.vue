@@ -1,4 +1,5 @@
 <template>
+
   <div class="page-container">
     <el-upload
       class="upload-demo"
@@ -10,6 +11,7 @@
       :headers="headersObj"
       :on-success="onSuccess"
       :on-error="onError"
+      :on-exceed="handleExceed"
     >
       <el-button>点击上传</el-button>
     </el-upload>
@@ -29,7 +31,11 @@
         lazy
         @contextmenu="(event) => onRightClick(event, url)"
         v-click-outside="onClickOutside"
-      />
+        ><template #error>
+          <div class="image-slot">
+            <el-icon ><icon-picture /></el-icon>
+          </div> </template
+      ></el-image>
       <el-popover
         :virtual-ref="() => imageBoxRefs[url]"
         trigger="contextmenu"
@@ -46,12 +52,12 @@
 </template>
 
 <script lang="js" setup>
-import Cookies from "js-cookie";
-import { ElMessage,ClickOutside as vClickOutside } from 'element-plus'
-import axios from "../util/axios"
 import { ref, reactive } from 'vue'
+import { ElMessage, ClickOutside as vClickOutside } from 'element-plus'
+import Cookies from "js-cookie";
+import axios from "../util/axios"
 import config from '../util/config';
-import router from "../router";
+import { Picture as IconPicture } from '@element-plus/icons-vue'
 const imageBoxRefs = reactive({})
 const popovershow = reactive({})
 
@@ -63,7 +69,7 @@ const urls = ref([])
 let variableName = 'value';
 const onRightClick = (event, url) => {
   event.preventDefault();
-  variableName=url;
+  variableName = url;
   console.log(variableName);
   console.log(popovershow[url]);
   for (const key in popovershow) {
@@ -82,20 +88,20 @@ const onClickOutside = () => {
   }
 }
 const deleteimage = async () => {
-  const response = await axios.post(`${config.server_address}/image/deleteImage`,{
-              filenewname: variableName,
-            },
-            { headers: { "Content-Type": "multipart/form-data" }})
+  const response = await axios.post(`${config.server_address}/image/deleteImage`, {
+    filenewname: variableName,
+  },
+    { headers: { "Content-Type": "multipart/form-data" } })
 
-  if(response.data.code==="200"){
+  if (response.data.code === "200") {
     ElMessage({
-    message: '文件删除成功',
-    type: 'success',
+      message: '文件删除成功',
+      type: 'success',
     },
+      // router.go(0)
+    )
     uploadImages()
-    // router.go(0)
-  )
-  }else{
+  } else {
     ElMessage.error("文件删除失败");
   }
 
@@ -108,13 +114,18 @@ const onSuccess = () => {
     message: '文件上传成功',
     type: 'success',
   },
-  uploadImages()
-  // router.go(0)
+
+    // router.go(0)
   )
+  uploadImages()
 }
 const onError = () => {
   ElMessage.error("文件上传失败")
 }
+const handleExceed = () => {
+  ElMessage.warning(`只能最多同时上传 10 张图片`);
+};
+
 const uploadImages = async () => {
   const response = await axios.post(`${config.server_address}/image/showimage`, {
     headers: {
@@ -147,9 +158,17 @@ uploadImages()
       display: block;
       width: 100%;
     }
+    
   }
 }
-
+.waterfall-width-column .image-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--el-fill-color-light);
+  color: var(--el-text-color-secondary);
+  font-size: 70px;
+}
 @media (min-width: 0px) {
   .waterfall-width-column {
     column-count: 1;
@@ -179,4 +198,5 @@ uploadImages()
     column-count: 5;
   }
 }
+
 </style>

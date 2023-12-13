@@ -264,7 +264,7 @@ export default {
               date100.format("YYYY年MM月DD日 HH:ss") + "日期小于100天"
             );
           } else {
-            let date1year = date.add(2, "year");
+            let date1year = date.add(1, "year");
             data.value[i].nexttime = date1year;
             data.value[i].nexttimename = "1年纪念日";
             console.log(
@@ -280,7 +280,7 @@ export default {
           );
         } else if (diffyear < 3) {
           if (diffday <= 1000) {
-            let date1000 = date.add(100, "day");
+            let date1000 = date.add(1000, "day");
             data.value[i].nexttime = date1000;
             data.value[i].nexttimename = "1000天纪念日";
             console.log(
